@@ -4,7 +4,7 @@
 library(tidyverse)
 
 files <- c("data/raw/warszawa.csv", "data/raw/walbrzych.csv", "data/raw/olsztyn.csv")
-city_names <- c("Warszawa", "Wałbrzych", "Olsztyn")
+city_names <- c("Warszawa", "Walbrzych", "Olsztyn")
 
 process_city <- function(city_name, path, years) {
   year_cols <- as.character(years)

@@ -1,0 +1,37 @@
+---
+title: "report"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+# SAD - projekt 1
+
+* Mikołaj Garbowski
+* Maksymilian Baj
+
+## Problem 1
+
+Korzystając z danych GUS porównujemy przeciętne miesięczne wynagrodzenie brutto oraz medianę cen za m2 lokali mieszkalnych sprzedanych w ramach transakcji rynkowych w Warszawie, Olsztynie i Wałbrzychu na przestrzeni lat.
+
+```{r, message=FALSE, warning=FALSE, results='hide'}
+source("R/plots.R")
+
+df <- read_csv("data/processed/cities.csv")
+```
+
+### Cena oraz wynagrodzenie w poszczególnych miastach
+
+```{r}
+plot_price_vs_wage_for_city(df, "Warszawa")
+plot_price_vs_wage_for_city(df, "Walbrzych")
+plot_price_vs_wage_for_city(df, "Olsztyn")
+```
+
+### Zbiorcze porównania
+
+```{r}
+plot_wage_by_city(df)
+plot_price_by_city(df)
+plot_price_to_wage_ratio(df)
+```
