@@ -1,5 +1,5 @@
-# Load raw data for each city, transform and merge int oa single tibble
-# Save results to data/processed directory
+# Processing raw data
+# Select only relevant information for each city and merge into one tibble for all cities
 
 library(tidyverse)
 
@@ -35,4 +35,9 @@ process_cities <- function(years = 2013:2024) {
 }
 
 
-process_cities() %>% write_csv("data/processed/cities.csv")
+get_years_range <- function(city_df) {
+  city_df %>% 
+    select(matches("\\d{4}")) %>% 
+    select(where(~ !any(is.na(.)))) %>%
+    colnames()
+}
