@@ -42,6 +42,7 @@ years <- files %>%
   map(~ read_csv2(.)) %>%
   map(~ get_years(.))
 
+plot_theme <- theme_minimal() + theme(panel.grid.minor.x = element_blank())
 
 plot_price_vs_wage_for_city <- function(df, city_name) {
   data <- df %>% filter(city == city_name) 
@@ -55,8 +56,53 @@ plot_price_vs_wage_for_city <- function(df, city_name) {
       y = "Kwota",
       color = ""
       ) +
-    theme_minimal()
+    plot_theme
+}
+
+plot_price_to_wage_ratio <- function(df) {
+  data <- df %>% 
+    mutate(ratio = price / wage)
+  ggplot(data) +
+    geom_line(aes(x = year, y = ratio, color = city)) +
+    scale_x_continuous(breaks = data$year) +
+    labs(
+      title = paste("Stosunek ceny m2 do miesięcznego wynagrodzenia"),
+      x = "Rok",
+      y = "Cena / Wynagrodzenie",
+      color = "Miasto"
+    ) +
+    plot_theme
+}
+
+plot_wage_by_city <- function(df) {
+  ggplot(df) +
+    geom_line(aes(x = year, y=wage, color=city)) +
+    scale_x_continuous(breaks = df$year) +
+    labs(
+      title = "Przeciętne miesięczne wynagrodzenie brutto",
+      color = "Miasto",
+      x = "Rok",
+      y = "Kwota"
+      ) +
+    plot_theme
+}
+
+plot_price_by_city <- function(df) {
+  ggplot(df) +
+    geom_line(aes(x = year, y=price, color=city)) +
+    scale_x_continuous(breaks = df$year) +
+    labs(
+      title = "Mediana cen za 1 m2 lokali mieszkalnych",
+      color = "Miasto",
+      x = "Rok",
+      y = "Kwota"
+    ) +
+    plot_theme
+    
 }
   
 df <- load_data()
 plot_price_vs_wage_for_city(df, "Warszawa")
+plot_price_to_wage_ratio(df)
+plot_wage_by_city(df)
+plot_price_by_city(df)
