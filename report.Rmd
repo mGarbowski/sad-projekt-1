@@ -13,6 +13,7 @@ output:
 ## Problem 1
 
 Korzystając z danych GUS porównujemy przeciętne miesięczne wynagrodzenie brutto oraz medianę cen za m2 lokali mieszkalnych sprzedanych w ramach transakcji rynkowych w Warszawie, Olsztynie i Wałbrzychu na przestrzeni lat.
+GUS uznaję za źródło bardzo wiarygodne.
 
 ```{r, message=FALSE, warning=FALSE, results='hide'}
 source("R/plots.R")
