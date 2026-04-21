@@ -7,15 +7,14 @@ output:
 
 # SAD - projekt 1
 
-* Mikołaj Garbowski
-* Maksymilian Baj
+-   Mikołaj Garbowski
+-   Maksymilian Baj
 
 ## Problem 1
 
-Korzystając z danych GUS porównujemy przeciętne miesięczne wynagrodzenie brutto oraz medianę cen za m2 lokali mieszkalnych sprzedanych w ramach transakcji rynkowych w Warszawie, Olsztynie i Wałbrzychu na przestrzeni lat.
-GUS uznaję za źródło bardzo wiarygodne.
+Korzystając z danych GUS porównujemy przeciętne miesięczne wynagrodzenie brutto oraz medianę cen za m2 lokali mieszkalnych sprzedanych w ramach transakcji rynkowych w Warszawie, Olsztynie i Wałbrzychu na przestrzeni lat. GUS uznaję za źródło bardzo wiarygodne.
 
-```{r, message=FALSE, warning=FALSE, results='hide'}
+```{r message=FALSE, warning=FALSE, results='hide'}
 source("R/plots.R")
 
 df <- read_csv("data/processed/cities.csv")
@@ -35,4 +34,57 @@ plot_price_vs_wage_for_city(df, "Olsztyn")
 plot_wage_by_city(df)
 plot_price_by_city(df)
 plot_price_to_wage_ratio(df)
+```
+
+## Problem 2 - ilustracja centralnego twierdzenia granicznego
+
+Parametry symulacji:
+ - rozkład bazowy: wykładniczy o parametrze $\lambda = 1$.
+ - rozmiary próby: $n \in \{2, 5, 10, 100\}$
+ - liczba symulacji: 10 000 powtórzeń dla każdej wartości n.
+
+### Wizualizacja dla średniej z próby
+
+```{r}
+source("R/clt_visualization/sample_data.R")
+source("R/clt_visualization/plots.R")
+
+n_vals <- c(2, 5, 20, 100)
+aggregated_data <- sample_for_multiple_n(n_vals)
+plot_hist(aggregated_data)
+
+```
+Poniżej wykres dla $n = 1000$ i większej liczby słupków histogramu:
+```{r}
+data <- sample_data(n = 1000, k = 10000)
+plot_hist(data, n_bins = 30)
+```
+Wizualizacja przy pomocy wykresu kwantyl-kwantyl:
+```{r}
+plot_qq(aggregated_data)
+```
+```{r}
+plot_qq(data)
+```
+### Wizualizacja dla średniej funkcji z próby
+
+Użyta funkcja: $ y = sin(x \pi)$
+
+```{r}
+n_vals <- c(2, 5, 20, 100)
+aggregated_data <- sample_for_multiple_n(n_vals, transform_func = function(x) sin(x * pi))
+plot_hist(aggregated_data)
+
+```
+```{r}
+data <- sample_data(n = 1000, k = 10000, transform_func = function(x) sin(x * pi))
+plot_hist(data, n_bins = 30)
+```
+Wizualizacja przy pomocy wykresu kwantyl-kwantyl
+```{r}
+plot_qq(aggregated_data)
+```
+Poniżej wykres dla $n = 1000$ i większej liczby słupków histogramu:
+```{r}
+plot_qq(data)
 ```
