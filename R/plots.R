@@ -11,7 +11,7 @@ plot_price_vs_wage_for_city <- function(df, city_name) {
     geom_line(aes(x = year, y = wage, color = "Wynagrodzenie")) +
     scale_x_continuous(breaks = data$year) +
     labs(
-      title = paste(city_name, "- miesieczne wynagrodzenie vs cena za m2 mieszkania"),
+      title = paste(city_name, "- miesięczne wynagrodzenie vs cena za m2 mieszkania"),
       x = "Rok",
       y = "Kwota [zł]",
       color = ""
@@ -26,7 +26,7 @@ plot_price_to_wage_ratio <- function(df) {
     geom_line(aes(x = year, y = ratio, color = city)) +
     scale_x_continuous(breaks = data$year) +
     labs(
-      title = paste("Stosunek ceny 1 m2 do przeciętnego miesiecznego wynagrodzenia brutto"),
+      title = paste("Stosunek ceny 1 m2 do przeciętnego miesięcznego wynagrodzenia brutto"),
       x = "Rok",
       y = "Cena / Wynagrodzenie [zł/zł]",
       color = "Miasto"
@@ -39,7 +39,7 @@ plot_wage_by_city <- function(df) {
     geom_line(aes(x = year, y=wage, color=city)) +
     scale_x_continuous(breaks = df$year) +
     labs(
-      title = "Przecietne miesieczne wynagrodzenie brutto",
+      title = "Przeciętne miesięczne wynagrodzenie brutto",
       color = "Miasto",
       x = "Rok",
       y = "Kwota [zł]"

@@ -1,9 +1,16 @@
 ---
-title: "report"
+title: "Sprawozdanie"
 output:
-  pdf_document: default
+  pdf_document:
+    latex_engine: xelatex
   html_document: default
+header-includes:
+  - \usepackage{fontspec}
 ---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(dev = "cairo_pdf")
+```
 
 # SAD - projekt 1
 
@@ -24,7 +31,7 @@ df <- read_csv("data/processed/cities.csv")
 
 ```{r}
 plot_price_vs_wage_for_city(df, "Warszawa")
-plot_price_vs_wage_for_city(df, "Walbrzych")
+plot_price_vs_wage_for_city(df, "Wałbrzych")
 plot_price_vs_wage_for_city(df, "Olsztyn")
 ```
 
@@ -66,9 +73,10 @@ plot_qq(aggregated_data)
 ```{r}
 plot_qq(data)
 ```
+
 ### Wizualizacja dla średniej funkcji z próby
 
-Użyta funkcja: $ y = sin(x \pi)$
+Użyta funkcja: $y = sin(x \pi)$
 
 ```{r}
 n_vals <- c(2, 5, 20, 100)
